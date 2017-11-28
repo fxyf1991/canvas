@@ -81,7 +81,7 @@ function autoSetCanvasSize(canvas){
     setCanvasSize()
   }
 
-//获取页面宽高
+//鑾峰彇椤甸潰瀹介珮
   function setCanvasSize(){
     var pageWidth = document.documentElement.clientWidth
     var pageHeight = document.documentElement.clientHeight
