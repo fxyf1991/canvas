@@ -3,8 +3,81 @@ var context = yyy.getContext('2d');
 
 autoSetCanvasSize(yyy)
 
+canvasToWhite()
+
 listenToUser(yyy)
 
+var eraserEnabled = false
+pen.onclick = function(){
+  eraserEnabled = false
+  pen.classList.add('active')
+  eraser.classList.remove('active')
+}
+eraser.onclick = function(){
+  eraserEnabled = true
+  eraser.classList.add('active')
+  pen.classList.remove('active')
+}
+
+black.onclick = function(){
+  context.strokeStyle = 'black'
+  black.classList.add('active')
+  red.classList.remove('active')
+  green.classList.remove('active')
+  blue.classList.remove('active')
+}
+
+red.onclick = function(){
+  context.strokeStyle = 'red'
+  red.classList.add('active')
+  black.classList.remove('active')
+  green.classList.remove('active')
+  blue.classList.remove('active')
+}
+
+green.onclick = function(){
+  context.strokeStyle = 'green'
+  green.classList.add('active')
+  black.classList.remove('active')
+  red.classList.remove('active')
+  blue.classList.remove('active')
+}
+
+blue.onclick = function(){
+  context.strokeStyle = 'blue'
+  blue.classList.add('active')
+  green.classList.remove('active')
+  red.classList.remove('active')
+}
+
+thin.onclick = function(){
+  lineWidth = 5
+}
+
+thick.onclick = function(){
+  lineWidth = 10
+}
+
+clear.onclick = function(){
+  //context.clearRect(0, 0, yyy.width, yyy.height)
+  canvasToWhite()
+}
+
+save.onclick = function(){
+  var url = yyy.toDataURL("image/png")
+  var a = document.createElement('a')
+  document.body.appendChild(a)
+  a.href = url
+  a.download = '我的画作'
+  a.target = '_blank'
+  a.click()
+}
+
+function canvasToWhite(){
+  context.rect(0, 0, yyy.width, yyy.height);
+  context.fillStyle="white";
+  context.fill();
+}
 
 function listenToUser(canvas) {
 
@@ -92,9 +165,9 @@ function listenToUser(canvas) {
 }
 
 function drawLine(x1, y1, x2, y2) {
+  context.lineWidth = lineWidth
   context.beginPath()
   context.moveTo(x1, y1)
-  context.lineWidth = 5
   context.lineTo(x2, y2)
   context.stroke()
   context.closePath()
@@ -106,15 +179,7 @@ function drawCircle(x, y, radius) {
   context.fill();
 }
 
-var eraserEnabled = false
-eraser.onclick = function () {
-  eraserEnabled = true
-  actions.className = 'actions x'
-}
-brush.onclick = function () {
-  eraserEnabled = false
-  actions.className = 'actions'
-}
+
 
 
 function autoSetCanvasSize(canvas) {
